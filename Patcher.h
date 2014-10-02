@@ -4,13 +4,14 @@
 #include <QObject>
 #include <QFile>
 #include <QBuffer>
+#include <QThread>
 
-class Patcher : public QObject
+class Patcher : public QThread
 {
     Q_OBJECT
 
 public:
-    explicit Patcher(QObject *parent = 0);
+    explicit Patcher();
     ~Patcher();
 
 private:
@@ -23,6 +24,7 @@ private:
     int foundPatches;
     int appliedPatches;
     int countOfPatches;
+    int progressValue;
 
 private:
     bool createPatchFile(const QString &aFileName);
@@ -35,6 +37,7 @@ private:
     void patchApplied(int aBegin, int aEnd, const QString &aFromValue, const QString &aToValue);
     void applyPatch(QBuffer &aBuffer, int aLength, int aOffset, const QByteArray &hexString);
     void fillBytes(QBuffer &aBuffer, int aLength, int aOffset, const QByteArray &hexString);
+    void run();
 
 public:
     void setFileName(const QString aFileName);
@@ -42,9 +45,7 @@ public:
 signals:
     void toLogArea(QString);
     void clearLogArea();
-
-public slots:
-    void startPatch();
+    void toProgressBar(int);
 };
 
 #endif // PATCHER_H

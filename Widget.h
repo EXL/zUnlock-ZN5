@@ -20,10 +20,17 @@ public:
 public:
     void retranslateUi();
 
-protected slots:
+private slots:
     void openCG45File();
     void appendToLog(QString aString);
     void clearLog();
+    void disableButtons();
+    void enableButtons();
+    void startPatchThread();
+    void setProgress(int aValue);
+
+private:
+    void disableGUIButtons(bool disable);
 
 private:
     QString textFileDialogCaption;

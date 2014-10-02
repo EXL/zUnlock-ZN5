@@ -15,15 +15,19 @@ Widget::Widget(QWidget *parent) :
     textFileDialogCaption = "";
     textFileDialogFilter = "";
 
-    patcher = new Patcher(this);
+    patcher = new Patcher();
 
-    setFixedSize(556, 439);
+    //setFixedSize(556, 439);
 
-    //connect(ui->frameDropFile, SLOT());
+    ui->progressBar->setDisabled(true);
+
     connect(ui->pushButtonOpenCG45, SIGNAL(clicked()), this, SLOT(openCG45File()));
-    connect(ui->pushButtonStartPatch, SIGNAL(clicked()), patcher, SLOT(startPatch()));
+    connect(ui->pushButtonStartPatch, SIGNAL(clicked()), this, SLOT(startPatchThread()));
     connect(patcher, SIGNAL(toLogArea(QString)), this, SLOT(appendToLog(QString)));
     connect(patcher, SIGNAL(clearLogArea()), this, SLOT(clearLog()));
+    connect(patcher, SIGNAL(started()), this, SLOT(disableButtons()));
+    connect(patcher, SIGNAL(finished()), this, SLOT(enableButtons()));
+    connect(patcher, SIGNAL(toProgressBar(int)), this, SLOT(setProgress(int)));
 
     retranslateUi();
 }
@@ -51,6 +55,36 @@ void Widget::clearLog()
     ui->textBrowser->clear();
 }
 
+void Widget::disableButtons()
+{
+    disableGUIButtons(true);
+}
+
+void Widget::enableButtons()
+{
+    disableGUIButtons(false);
+}
+
+void Widget::disableGUIButtons(bool disable)
+{
+    ui->pushButtonOpenCG45->setDisabled(disable);
+    ui->pushButtonStartPatch->setDisabled(disable);
+
+    ui->progressBar->setDisabled(!disable);
+
+    //TODO: ui->label->acceptDrops();
+}
+
+void Widget::startPatchThread()
+{
+    patcher->start(QThread::IdlePriority);
+}
+
+void Widget::setProgress(int aValue)
+{
+    ui->progressBar->setValue(aValue);
+}
+
 void Widget::retranslateUi()
 {
     textFileDialogCaption = tr("Open *.smg file");
@@ -59,6 +93,7 @@ void Widget::retranslateUi()
 
 Widget::~Widget()
 {
+    delete patcher;
     delete ui;
 }
 

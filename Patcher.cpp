@@ -4,11 +4,16 @@
 #include <QDir>
 #include <QDebug>
 
-Patcher::Patcher(QObject *parent) :
-    QObject(parent),
-    foundPatches(0), appliedPatches(0), countOfPatches(0)
+#define COUNT_OF_PATCHES 8
+#define DELAY 50
+
+Patcher::Patcher() :
+    foundPatches(0), appliedPatches(0), countOfPatches(0),
+    progressValue(0)
 {
     fileNameCG45 = "";
+
+    moveToThread(this);
 }
 
 void Patcher::setFileName(const QString aFileName)
@@ -16,10 +21,11 @@ void Patcher::setFileName(const QString aFileName)
     fileNameCG45 = aFileName;
 }
 
-void Patcher::startPatch()
+void Patcher::run()
 {
     foundPatches = appliedPatches = countOfPatches = 0;
     emit clearLogArea();
+    emit toProgressBar(0);
 
     if (fileNameCG45 != "") {
         emit toLogArea(tr("Start Patching..."));
@@ -52,6 +58,8 @@ void Patcher::startPatch()
     } else {
         emit toLogArea(tr("Error: File isn't here"));
     }
+
+    emit toLogArea(tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
 }
 
 bool Patcher::createPatchFile(const QString &aFileName)
@@ -228,11 +236,16 @@ void Patcher::patchApplied(int aPatch, const QByteArray &aValue, const QByteArra
                    .arg(QString::number(aPatch, 16).toUpper())
                    .arg(QString(aValue.toHex()))
                    .arg(QString(hexString)));
+    if (appliedPatches < COUNT_OF_PATCHES) {
+        emit toProgressBar(appliedPatches * (100 / COUNT_OF_PATCHES));
+    } else {
+        emit toProgressBar(100);
+    }
 }
 
 void Patcher::patchApplied(int aBegin, int aEnd, const QString &aFromValue, const QString &aToValue)
 {
-    ++foundPatches;
+    ++appliedPatches;
     ++countOfPatches;
     emit toLogArea(QString("#%1: Patch 0x%2..0x%3 is filled. Value (HEX) is %4 -> %5")
                    .arg(countOfPatches)
@@ -240,6 +253,11 @@ void Patcher::patchApplied(int aBegin, int aEnd, const QString &aFromValue, cons
                    .arg(QString::number(aEnd, 16).toUpper())
                    .arg(aFromValue.toUpper())
                    .arg(aToValue.toUpper()));
+    if (appliedPatches < COUNT_OF_PATCHES) {
+        emit toProgressBar(appliedPatches * (100 / COUNT_OF_PATCHES));
+    } else {
+        emit toProgressBar(100);
+    }
 }
 
 void Patcher::applyPatch(QBuffer &aBuffer, int aLength, int aOffset, const QByteArray &hexString)
@@ -254,6 +272,8 @@ void Patcher::applyPatch(QBuffer &aBuffer, int aLength, int aOffset, const QByte
         patchApplied(aOffset, valueBA, hexString);
     }
     aBuffer.seek(0);
+
+    msleep(DELAY);
 }
 
 void Patcher::fillBytes(QBuffer &aBuffer, int aLength, int aOffset, const QByteArray &hexString)
@@ -287,6 +307,8 @@ void Patcher::fillBytes(QBuffer &aBuffer, int aLength, int aOffset, const QByteA
                      QString::number((unsigned char)fillArray.at(fillArray.size() - 1), 16));
     }
     aBuffer.seek(0);
+
+    msleep(DELAY);
 }
 
 Patcher::~Patcher()
