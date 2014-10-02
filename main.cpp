@@ -1,6 +1,8 @@
 #include "Widget.h"
+
 #include <QApplication>
 #include <QTranslator>
+#include <QLocale>
 
 int main(int argc, char *argv[])
 {
