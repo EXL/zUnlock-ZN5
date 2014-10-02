@@ -23,10 +23,10 @@ void Patcher::run()
     emit toProgressBar(0);
     emit toLogArea(Message, tr("Patching started... %1").arg(QDateTime::currentDateTime().toString("h:m:s")));
 
-    createPatchFile();
-
-    emit toLogArea(Success, tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
-    emit toLogArea(Message, tr("Patching ended. %1").arg(QDateTime::currentDateTime().toString("h:m:s")));
+    if(createPatchFile()) {
+        emit toLogArea(Success, tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
+        emit toLogArea(Message, tr("Patching ended. %1").arg(QDateTime::currentDateTime().toString("h:m:s")));
+    }
 }
 
 bool Patcher::createPatchFile()

@@ -95,7 +95,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="labelDropFile">
+         <widget class="DropArea" name="labelDropFile">
           <property name="minimumSize">
            <size>
             <width>110</width>
@@ -103,7 +103,7 @@
            </size>
           </property>
           <property name="acceptDrops">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Please &lt;br/&gt;Drag'n'Drop &lt;br/&gt;CG45 SMG file &lt;br/&gt;in this area&lt;br/&gt;for patch&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -233,6 +233,13 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>DropArea</class>
+   <extends>QLabel</extends>
+   <header>DropArea.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <designerdata>

@@ -3,7 +3,6 @@
 
 #include "Patcher.h"
 #include "Filer.h"
-//#include "DropArea.h"
 
 #include <QFileDialog>
 #include <QDateTime>
@@ -20,7 +19,9 @@ Widget::Widget(QWidget *parent) :
     filer = new Filer(this);
     patcher = new Patcher();
 
-    //setFixedSize(556, 439);
+    setFixedSize(sizeHint());
+
+    ui->labelDropFile->setLabelText(ui->labelDropFile->text());
 
     connect(ui->pushButtonOpenCG45, SIGNAL(clicked()), this, SLOT(openCG45File()));
     connect(ui->pushButtonStartPatch, SIGNAL(clicked()), this, SLOT(startPatchThread()));
@@ -32,6 +33,7 @@ Widget::Widget(QWidget *parent) :
     connect(patcher, SIGNAL(toProgressBar(int)), this, SLOT(setProgress(int)));
 
     connect(filer, SIGNAL(toLogArea(ColError, QString)), this, SLOT(appendToLog(ColError, QString)));
+    connect(ui->labelDropFile, SIGNAL(toPatcher(QString, bool)), this, SLOT(initPatcher(QString, bool)));
 
     initLogArea();
 }
@@ -43,7 +45,7 @@ void Widget::openCG45File()
                                                         "",
                                                         tr("SMG Files (*.smg);;All Files (*)"));
 
-    initPatcher(fileNameCG45);
+    initPatcher(fileNameCG45, false);
 }
 
 void Widget::appendToLog(ColError err, QString aString)
@@ -94,8 +96,7 @@ void Widget::disableGUIButtons(bool disable)
     ui->pushButtonStartPatch->setDisabled(disable);
 
     ui->progressBar->setDisabled(!disable);
-
-    //TODO: ui->label->acceptDrops();
+    ui->labelDropFile->setDisabled(disable);
 }
 
 void Widget::initLogArea()
@@ -103,7 +104,7 @@ void Widget::initLogArea()
     appendToLog(Message, tr("Hello! Now %1").arg(QDateTime::currentDateTime().toString("d/M/yy h:m:s")));
 }
 
-void Widget::initPatcher(const QString &aFilePath)
+void Widget::initPatcher(const QString &aFilePath, bool drop)
 {
     Filer::FileError error = filer->setName(aFilePath);
 
@@ -115,6 +116,10 @@ void Widget::initPatcher(const QString &aFilePath)
     patcher->setFileName(filer->getFileName());
     patcher->setDirName(filer->getDirName());
     patcher->setPatchedFileName(filer->getPatchedFileName());
+
+    if (drop) {
+        startPatchThread();
+    }
 }
 
 void Widget::paintEvent(QPaintEvent *)

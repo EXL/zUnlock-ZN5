@@ -8,7 +8,6 @@
 
 class Patcher;
 class Filer;
-//class DropArea;
 
 namespace Ui {
 class Widget;
@@ -30,11 +29,11 @@ private slots:
     void enableButtons();
     void startPatchThread();
     void setProgress(int aValue);
+    void initPatcher(const QString &aFilePath, bool drop);
 
 private:
     void disableGUIButtons(bool disable);
     void initLogArea();
-    void initPatcher(const QString &aFilePath);
 
 protected:
     void paintEvent(QPaintEvent *);
@@ -42,7 +41,6 @@ protected:
 private:
     Patcher *patcher;
     Filer *filer;
-    //DropArea *dropArea;
     Ui::Widget *ui;
 };
 
