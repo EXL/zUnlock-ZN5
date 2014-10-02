@@ -1,0 +1,171 @@
++-----------+-----------+-------+
+| ZN5 T-mob | ZN5 China | Res   |
++-----------+-----------+-------+
+| 0000:E8F0 |           | Patch |
+| 0000:ED10 |           | Check |
+| 0003:6870 |           | Check |
+| 0007:1750 | 0006:FEB0 | Patch |
+| 0009:6020 | 000E:90C0 | Patch |
+| 0009:6960 | 0008:E150 | Patch |
+| 003D:F800 |           | Check |
++-----------+-----------+-------+
+
++---------------+---------------+--------------+--------------+-------------+---------------+---------+
+| b ZN5T Offset | e ZN5T Offset | b ZN5 Offset | e ZN5 Offset |  Lock (ZN5) | Unlock (ZN5T) |  Status |
++---------------+---------------+--------------+--------------+-------------+---------------+---------+
+|   0000:E8F4   |   0000:E8F4   |  0000:E8F4   |  0000:E8F4   |     81      |       80      | Patched |
+|   0000:E901   |   0000:E901   |  0000:E901   |  0000:E901   |     24      |       20      | Patched |
+|   0000:ED16   |   0000:ED19   |  0000:ED16   |  0000:ED19   | 28 D0 13 80 |  81 C0 71 9F  | Patched |
+|   0003:6870   |   0003:6873   |  0003:8C10   |  0003:8C13   | C0 96 20 96 |  8F C0 71 9F  | Patched |
+|   0007:175C   |   0007:175D   |  0006:FEC4   |  0006:FEC5   |    91 40    |     C0 90     | Patched |
+|   0009:6020   |   0009:6027   |  000E:90C8   |  000E:90CF   |  1  56..80  |   2  C0..90   | Patched |
+|   0009:6960   |   0009:6965   |  0008:E154   |  0008:E159   |  3  94..93  |   4  C0..90   | Patched |
+|   003D:F800   |   003D:FC67   |  003D:F800   |  003D:FC67   |  5  00..00  |   6  FF..FF   | Patched |
++---------------+---------------+--------------+--------------+-------------+---------------+---------+
+
+1  56..80 = 56 83 01 30 0E 20 08 80
+2  C0..90 = C0 90 C0 90 C0 90 C0 90
+3  94..93 = 94 32 30 31 C3 93
+4  C0..90 = C0 90 C0 90 C0 90
+5  00..00 = 00 B3 02 DF DA 14 1B 95 DC 6D 07 97 40 CE 53 EA
+            90 0F 91 20 20 B5 2F DD 00 F3 FF 30 00 FF 02 00
+            5F 63 AD F8 6D 83 6E A7 EB 67 6D 71 D0 BE B3 BB
+            4D 5C 07 A5 01 4B 33 02 B8 CF 30 00 04 20 C0 93
+            00 00 30 0C 11 00 93 01 00 C0 00 00 F8 3D 00 00
+            03 00 02 E8 CF 33 01 50 30 C0 00 04 00 00 45 80
+            A6 02 F2 B0 CF 76 07 A2 73 F7 F9 AE 91 DA AE 0F
+            FB E4 36 92 B3 73 4D 5E 43 AE 0D 6F 4C 67 B7 9E
+            0A 31 8E 90 F7 66 B5 0D 20 EA 57 90 86 8D 26 96
+            E3 28 36 66 E1 71 98 B9 05 AE 3C 8B F3 80 63 07
+            3B D7 4F FC F7 F9 76 1A FA 4C 63 17 90 44 77 9F
+            7A 98 AE 11 1C DB 15 66 70 75 95 71 BA A3 38 27
+            CC 25 75 B7 3F 1E 30 DD 5C 86 AB 68 56 CF 7E 48
+            30 3E 34 E3 BE 5B 93 CC 9F 28 5C BE 1D FF 01 22
+            01 02 04 00 4F 2E 4D 3D 74 6F 72 6F 6C 6F 20 61
+            6E 49 2C 63 4F 20 3D 55 6F 4D 6F 74 6F 72 61 6C
+            50 20 49 4B 20 2C 4E 43 48 3D 42 41 43 20 20 41
+            37 32 46 35 60 01 62 4A AA 38 01 CA 04 00 4F 39
+            4D 3D 74 6F 72 6F 6C 6F 20 61 6E 49 2C 63 4F 20
+            3D 55 6F 4D 6F 74 6F 72 61 6C 50 20 49 4B 20 2C
+            4E 43 43 3D 46 53 43 20 20 41 37 32 2D 35 3B 31
+            53 20 3D 4E 36 32 35 35 00 02 03 00 00 01 00 01
+            B2 80 39 98 9C BE 8F 26 61 E5 1C 8B 54 35 BD 8E
+            9A 9E C2 A2 5F 25 A5 5A 6D 25 07 D4 DA 70 BE 3C
+            18 E0 C8 78 23 90 E8 4C 9B 57 54 A2 F2 7B 5C 25
+            C5 B2 CB BE 5F 89 27 A4 14 8C 4C AA 68 6F 30 57
+            DB 52 FF 89 9C 06 12 FC 9C 8E DC 46 1C 0E 0B 9D
+            A8 EE E4 6B 87 31 85 88 A8 A6 76 F5 B9 3A B8 A7
+            7E 6C 27 06 66 12 45 FD F6 58 48 B1 0B 8F BB 79
+            B4 D1 A8 7D 25 50 B1 98 3B FB 08 3F AC 93 DF 48
+            00 33 34 80 0E 84 5C 16 30 67 34 8C 22 91 40 0E
+            83 DF C8 17 A3 6E 2F 74 FE B5 A0 35 FE 67 43 03
+            D4 65 A8 F4 02 93 51 24 09 99 6D A4 3A D4 7B D5
+            92 F1 8F C6 9F BF 8F 7D BB CD 18 F1 57 3A AD B7
+            D0 66 0E 40 F0 0E FF 14 CA D1 95 50 01 AB 30 A5
+            74 25 65 24 20 66 6D 4F 20 43 5B 14 CD 07 30 91
+            91 0B 77 78 66 64 C6 03 F5 4F FA 15 15 77 8B 62
+            55 8B 5C 87 B6 61 BF 6F 55 BD 6A ED B5 3E 11 57
+            AE FD 01 35 01 02 04 00 4F 30 4D 3D 74 6F 72 6F
+            6C 6F 20 61 6E 49 2C 63 4F 20 3D 55 6F 4D 6F 74
+            6F 72 61 6C 50 20 49 4B 20 2C 4E 43 43 3D 46 53
+            43 20 20 41 37 32 2D 35 46 31 60 01 62 C7 AB 38
+            01 47 04 00 4F 38 4D 3D 74 6F 72 6F 6C 6F 20 61
+            6E 49 2C 63 4F 20 3D 55 6F 4D 6F 74 6F 72 61 6C
+            50 20 49 4B 20 2C 4E 43 41 3D 50 50 32 20 35 37
+            31 2D 32 2D 20 3B 4E 53 32 3D 35 36 02 37 00 00
+            01 03 01 00 80 00 37 B9 B7 EC D2 8D 39 77 6D FF
+            5A 43 54 44 A5 3F 4B 29 C1 9E 96 6D C0 C1 99 29
+            18 FE D7 1D CE 2A ED 7F EC F9 7E EE 6B 6D 7E 3B
+            9F 03 38 89 2D FD F1 18 46 4E 49 96 62 85 CA 43
+            AF 18 BC 42 39 F2 E8 11 3C BA C3 FD D0 F0 27 94
+            EB B2 62 84 F3 33 F9 27 CE 09 E6 23 70 80 30 6A
+            44 24 C5 44 EB 30 20 8E 9E C3 E3 9F AA 04 B7 7E
+            C2 FA BD 1F E9 11 D3 02 4C 6B E7 4F EE 91 39 5F
+            1F 6E C3 40 23 CD 80 00 59 7E 1E 92 3B E4 77 81
+            DE 88 5B C4 34 CC 3A 0D 03 BF 51 86 4C 5D D8 22
+            82 50 D0 16 FE 5E 97 EE D7 36 2E 84 A7 02 C2 C2
+            5A 9A 12 C4 B9 30 D8 39 F3 48 B9 59 BB C5 0F 02
+            6F AC 0E 21 9E D5 69 3C 55 49 29 90 96 0E A1 A9
+            BE A8 35 A2 DC 04 7F E4 36 80 54 5F 0A E2 12 F9
+            37 D0 3E 86 A3 FB E8 29 A0 A6 66 64 78 24 86 D4
+            30 B3 13 0A 8A E3 50 5A 03 31 BE F0 DD 5E 2E 51
+            94 83 50 8C 2E 68 08 27 67 68 E4 3D 48 82 BB 65
+            22 4A 5B 16 A9 D3 55 03 E6 73 B3 5A E1 CE 81 96
+            89 C0 C3 25 4E 2D F7 81 F7 16 91 0B 20 07 7E 83
+            DC AF 53 72 F2 3B 4B 44 40 08 45 2C 69 FD 3C B6
+            6D 1A B8 4A 47 76 17 43 9A 52 66 71 66 67 EC 7F
+            10 B7 9E DC FF 1B 07 73 F0 E3 3C 40 12 4B E8 92
+            9D 0D 0C 7A 1D 5B 08 F4 2E 2D 97 FF 27 47 32 07
+            4F 1E 66 D4 7E 6F C1 84 94 C8 CB 2C F3 C6 30 21
+            31 10 5B A1 E1 B4 58 00
+6  FF..FF = FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+            FF FF FF FF FF FF FF FF
