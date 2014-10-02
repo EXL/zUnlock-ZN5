@@ -11,7 +11,7 @@ Patcher::Patcher() :
     foundPatches(0), appliedPatches(0), countOfPatches(0),
     progressValue(0)
 {
-    fileNameCG45 = "";
+    fileNameCG45 = dirNameCG45 = "";
 
     moveToThread(this);
 }
@@ -19,6 +19,11 @@ Patcher::Patcher() :
 void Patcher::setFileName(const QString aFileName)
 {
     fileNameCG45 = aFileName;
+}
+
+void Patcher::setDirName(const QString aDirName)
+{
+    dirNameCG45 = aDirName;
 }
 
 void Patcher::run()
@@ -29,18 +34,14 @@ void Patcher::run()
 
     if (fileNameCG45 != "") {
         emit toLogArea(tr("Start Patching..."));
-
         QStringList stringList = fileNameCG45.split(QDir::separator());
         QString patchfileName = "_patched";
         int _size = stringList.size() - 1;
         QString origFileName = stringList.at(_size);
-
-        qDebug() << stringList << stringList.at(_size);
-
         if (origFileName.contains('.')) {
-            // Find first dot
+            // Find last dot
             int i;
-            for (i = 0; i <= origFileName.size(); ++i) {
+            for (i = origFileName.size() - 1; i >= 0; --i) {
                 if (origFileName.at(i) == '.') {
                     break;
                 }
@@ -50,15 +51,10 @@ void Patcher::run()
         } else {
             patchfileName = origFileName + patchfileName;
         }
-
-        qDebug() << patchfileName;
-
         createPatchFile(patchfileName);
-
     } else {
         emit toLogArea(tr("Error: File isn't here"));
     }
-
     emit toLogArea(tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
 }
 
@@ -68,15 +64,16 @@ bool Patcher::createPatchFile(const QString &aFileName)
     if (fileCG45.open(QIODevice::ReadOnly)) {
         QByteArray header = fileCG45.read(16);
         EPhoneModels phone = determinePhoneModel(header);
+        fileCG45.seek(0);
         switch (phone) {
             case ZN5: {
                 emit toLogArea(tr("CG45 from Motorola ZN5 (64 MB RAM)"));
-                patchCG45fromZN5(fileCG45);
+                patchCG45to(fileCG45, aFileName, ZN5);
                 break;
             }
             case ZN5Tmobile: {
                 emit toLogArea(tr("CG45 from Motorola ZN5 T-Mobile (128 MB RAM)"));
-                patchCG45fromZN5Tmobile(fileCG45);
+                patchCG45to(fileCG45, aFileName, ZN5Tmobile);
                 break;
             }
             case UnknownModel:
@@ -123,13 +120,18 @@ Patcher::EPhoneModels Patcher::determinePhoneModel(const QByteArray &aHeader)
     return UnknownModel;
 }
 
-bool Patcher::patchCG45fromZN5(QFile &aFile)
+bool Patcher::patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneModels aPhone)
 {
-    aFile.seek(0);
-    QByteArray br(aFile.readAll());
-    QBuffer buffer(&br);
+    QByteArray ramByteArray(aFile.readAll());
+    QBuffer buffer(&ramByteArray);
     if (!buffer.open(QIODevice::ReadWrite)) {
-        qDebug() << buffer.errorString();
+        toLogArea(buffer.errorString());
+        return false;
+    }
+
+    if (aPhone == UnknownModel) {
+        toLogArea(tr("Bad CG45 file"));
+        return false;
     }
 
     // Patch #1
@@ -141,69 +143,49 @@ bool Patcher::patchCG45fromZN5(QFile &aFile)
     // Patch #3
     applyPatch(buffer, 4, 0x0000ED16, "81C0719F");
 
-    // Patch #4
-    applyPatch(buffer, 4, 0x00038C10, "8FC0719F");
+    switch (aPhone) {
+        case ZN5: {
+            // Patch #4
+            applyPatch(buffer, 4, 0x00038C10, "8FC0719F");
 
-    // Patch #5
-    applyPatch(buffer, 2, 0x0006FEC4, "C090");
+            // Patch #5
+            applyPatch(buffer, 2, 0x0006FEC4, "C090");
 
-    // Patch #6
-    applyPatch(buffer, 8, 0x000E90C8, "C090C090C090C090");
+            // Patch #6
+            applyPatch(buffer, 8, 0x000E90C8, "C090C090C090C090");
 
-    // Patch #7
-    applyPatch(buffer, 6, 0x0008E154, "C090C090C090");
+            // Patch #7
+            applyPatch(buffer, 6, 0x0008E154, "C090C090C090");
+            break;
+        }
+        case ZN5Tmobile: {
+            // Patch #4
+            applyPatch(buffer, 4, 0x00036870, "8FC0719F");
 
-    // Patch #8
-    fillBytes(buffer, 1128, 0x003DF800, "FF");
+            // Patch #5
+            applyPatch(buffer, 2, 0x0007175C, "C090");
 
-    buffer.close();
+            // Patch #6
+            applyPatch(buffer, 8, 0x00096020, "C090C090C090C090");
 
-    QFile file("test_patch");
-    file.open(QIODevice::WriteOnly);
-    file.write(br);
-    file.close();
-
-}
-
-bool Patcher::patchCG45fromZN5Tmobile(QFile &aFile)
-{
-    aFile.seek(0);
-    QByteArray br(aFile.readAll());
-    QBuffer buffer(&br);
-    if (!buffer.open(QIODevice::ReadWrite)) {
-        qDebug() << buffer.errorString();
+            // Patch #7
+            applyPatch(buffer, 6, 0x00096960, "C090C090C090");
+            break;
+        }
+        default:
+        case UnknownModel: {
+            return false;
+        }
     }
 
-    // Patch #1
-    applyPatch(buffer, 1, 0x0000E8F4, "80");
-
-    // Patch #2
-    applyPatch(buffer, 1, 0x0000E901, "20");
-
-    // Patch #3
-    applyPatch(buffer, 4, 0x0000ED16, "81C0719F");
-
-    // Patch #4
-    applyPatch(buffer, 4, 0x00036870, "8FC0719F");
-
-    // Patch #5
-    applyPatch(buffer, 2, 0x0007175C, "C090");
-
-    // Patch #6
-    applyPatch(buffer, 8, 0x00096020, "C090C090C090C090");
-
-    // Patch #7
-    applyPatch(buffer, 6, 0x00096960, "C090C090C090");
-
     // Patch #8
     fillBytes(buffer, 1128, 0x003DF800, "FF");
 
     buffer.close();
 
-    QFile file("test_patch_t_mob");
-    file.open(QIODevice::WriteOnly);
-    file.write(br);
-    file.close();
+    writePatchedCG45file(dirNameCG45 + QDir::separator() + aFileName, ramByteArray);
+
+    return true;
 }
 
 void Patcher::patchFound(int aPatch, const QByteArray &aValue)
@@ -309,6 +291,18 @@ void Patcher::fillBytes(QBuffer &aBuffer, int aLength, int aOffset, const QByteA
     aBuffer.seek(0);
 
     msleep(DELAY);
+}
+
+bool Patcher::writePatchedCG45file(const QString &aFullName, const QByteArray &aByteArray)
+{
+    QFile file(aFullName);
+    if (!file.open(QIODevice::WriteOnly)) {
+        return false;
+    } else {
+        file.write(aByteArray);
+        file.close();
+        return true;
+    }
 }
 
 Patcher::~Patcher()

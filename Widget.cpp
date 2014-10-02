@@ -40,8 +40,25 @@ void Widget::openCG45File()
                                                         textFileDialogFilter);
 
     if (fileNameCG45 != "") {
+        QFileInfo fileInfo(fileNameCG45);
+        QString pathToDir = fileInfo.dir().path();
+        QFileInfo dirInfo(pathToDir);
+
+        if (!dirInfo.isReadable()) {
+            appendToLog("Dir isn't Readable");
+            return;
+        }
+
+        if (!dirInfo.isWritable()) {
+            appendToLog("Dir ist't Writable");
+            return;
+        }
+
+        qDebug() << pathToDir;
+
         ui->lineEditFilePath->setText(fileNameCG45);
         patcher->setFileName(fileNameCG45);
+        patcher->setDirName(pathToDir);
     }
 }
 
