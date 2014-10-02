@@ -3,9 +3,11 @@
 
 #include "Patcher.h"
 #include "Filer.h"
+//#include "DropArea.h"
 
 #include <QFileDialog>
 #include <QDateTime>
+#include <QPainter>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -109,10 +111,16 @@ void Widget::initPatcher(const QString &aFilePath)
         return;
     }
 
-    ui->lineEditFilePath->setText(filer->getDirName() + QDir::separator() + filer->getFileName());
+    ui->lineEditFilePath->setText(filer->getDirName() + filer->getFileName());
     patcher->setFileName(filer->getFileName());
     patcher->setDirName(filer->getDirName());
     patcher->setPatchedFileName(filer->getPatchedFileName());
+}
+
+void Widget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.drawPixmap(0, 0, QPixmap("://gfx/header.png"));
 }
 
 void Widget::startPatchThread()
@@ -128,6 +136,7 @@ void Widget::setProgress(int aValue)
 Widget::~Widget()
 {
     delete patcher;
+    delete filer;
     delete ui;
 }
 

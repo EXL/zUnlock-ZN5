@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         Widget.cpp \
     Patcher.cpp \
-    Filer.cpp
+    Filer.cpp \
+    DropArea.cpp
 
 HEADERS  += Widget.h \
     Patcher.h \
     Filer.h \
-    ColorLog.h
+    ColorLog.h \
+    DropArea.h
 
 FORMS    += Widget.ui
 

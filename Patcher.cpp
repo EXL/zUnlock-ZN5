@@ -1,7 +1,6 @@
 #include "Patcher.h"
 
 #include <QDir>
-#include <QDebug>
 #include <QDateTime>
 
 #define COUNT_OF_PATCHES 8
@@ -279,7 +278,7 @@ bool Patcher::writePatchedCG45file(const QString &aFullName, const QByteArray &a
     } else {
         file.write(aByteArray);
         file.close();
-        emit toLogArea(Success, tr("File: %1 successfully writed!").arg(patchedFileNameCG45));
+        emit toLogArea(Success, tr("File: <strong>%1</strong> successfully writed!").arg(patchedFileNameCG45));
         return true;
     }
 }

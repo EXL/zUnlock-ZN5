@@ -4,9 +4,11 @@
 #include "ColorLog.h"
 
 #include <QWidget>
+#include <QPaintEvent>
 
 class Patcher;
 class Filer;
+//class DropArea;
 
 namespace Ui {
 class Widget;
@@ -34,9 +36,13 @@ private:
     void initLogArea();
     void initPatcher(const QString &aFilePath);
 
+protected:
+    void paintEvent(QPaintEvent *);
+
 private:
     Patcher *patcher;
     Filer *filer;
+    //DropArea *dropArea;
     Ui::Widget *ui;
 };
 
