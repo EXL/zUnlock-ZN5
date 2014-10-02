@@ -14,10 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         Widget.cpp \
-    Patcher.cpp
+    Patcher.cpp \
+    Filer.cpp
 
 HEADERS  += Widget.h \
-    Patcher.h
+    Patcher.h \
+    Filer.h \
+    ColorLog.h
 
 FORMS    += Widget.ui
 

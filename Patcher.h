@@ -1,6 +1,8 @@
 #ifndef PATCHER_H
 #define PATCHER_H
 
+#include "ColorLog.h"
+
 #include <QObject>
 #include <QFile>
 #include <QBuffer>
@@ -31,8 +33,6 @@ private:
     bool createPatchFile(const QString &aFileName);
     Patcher::EPhoneModels determinePhoneModel(const QByteArray &aHeader);
     bool patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneModels aPhone);
-    //bool patchCG45fromZN5(QFile &aFile, const QString &aFileName);
-    //bool patchCG45fromZN5Tmobile(QFile &aFile, const QString &aFileName);
     void patchFound(int aPatch, const QByteArray &aValue);
     void patchFound(int aBegin, int aEnd, const QString &aValue);
     void patchApplied(int aPatch, const QByteArray &aValue, const QByteArray &hexString);
@@ -47,7 +47,7 @@ public:
     void setDirName(const QString aDirName);
 
 signals:
-    void toLogArea(QString);
+    void toLogArea(ColError, QString);
     void clearLogArea();
     void toProgressBar(int);
 };

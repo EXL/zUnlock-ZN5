@@ -33,7 +33,7 @@ void Patcher::run()
     emit toProgressBar(0);
 
     if (fileNameCG45 != "") {
-        emit toLogArea(tr("Start Patching..."));
+        emit toLogArea(Message, tr("Start Patching..."));
         QStringList stringList = fileNameCG45.split(QDir::separator());
         QString patchfileName = "_patched";
         int _size = stringList.size() - 1;
@@ -53,9 +53,9 @@ void Patcher::run()
         }
         createPatchFile(patchfileName);
     } else {
-        emit toLogArea(tr("Error: File isn't here"));
+        emit toLogArea(Error, tr("File isn't here"));
     }
-    emit toLogArea(tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
+    emit toLogArea(Success, tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
 }
 
 bool Patcher::createPatchFile(const QString &aFileName)
@@ -67,18 +67,18 @@ bool Patcher::createPatchFile(const QString &aFileName)
         fileCG45.seek(0);
         switch (phone) {
             case ZN5: {
-                emit toLogArea(tr("CG45 from Motorola ZN5 (64 MB RAM)"));
+                emit toLogArea(Message, tr("CG45 from Motorola ZN5 (64 MB RAM)"));
                 patchCG45to(fileCG45, aFileName, ZN5);
                 break;
             }
             case ZN5Tmobile: {
-                emit toLogArea(tr("CG45 from Motorola ZN5 T-Mobile (128 MB RAM)"));
+                emit toLogArea(Message, tr("CG45 from Motorola ZN5 T-Mobile (128 MB RAM)"));
                 patchCG45to(fileCG45, aFileName, ZN5Tmobile);
                 break;
             }
             case UnknownModel:
             default: {
-                emit toLogArea(tr("File isn't recognize!"));
+                emit toLogArea(Error, tr("File isn't recognize!"));
                 break;
             }
         }
@@ -125,12 +125,12 @@ bool Patcher::patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneMo
     QByteArray ramByteArray(aFile.readAll());
     QBuffer buffer(&ramByteArray);
     if (!buffer.open(QIODevice::ReadWrite)) {
-        toLogArea(buffer.errorString());
+        toLogArea(Error, buffer.errorString());
         return false;
     }
 
     if (aPhone == UnknownModel) {
-        toLogArea(tr("Bad CG45 file"));
+        toLogArea(Error, tr("Bad CG45 file"));
         return false;
     }
 
@@ -192,7 +192,7 @@ void Patcher::patchFound(int aPatch, const QByteArray &aValue)
 {
     ++foundPatches;
     ++countOfPatches;
-    emit toLogArea(QString("#%1: Patch 0x%2 is found. Value (HEX) is %3")
+    emit toLogArea(Warning, QString("#%1: Patch 0x%2 is found. Value (HEX) is %3")
                    .arg(countOfPatches)
                    .arg(QString::number(aPatch, 16).toUpper())
                    .arg(QString(aValue.toHex())));
@@ -202,7 +202,7 @@ void Patcher::patchFound(int aBegin, int aEnd, const QString &aValue)
 {
     ++foundPatches;
     ++countOfPatches;
-    emit toLogArea(QString("#%1: Patch filling 0x%2..0x%3 is found. Value (HEX) is %4")
+    emit toLogArea(Warning, QString("#%1: Patch filling 0x%2..0x%3 is found. Value (HEX) is %4")
                    .arg(countOfPatches)
                    .arg(QString::number(aBegin, 16).toUpper())
                    .arg(QString::number(aEnd, 16).toUpper())
@@ -213,7 +213,7 @@ void Patcher::patchApplied(int aPatch, const QByteArray &aValue, const QByteArra
 {
     ++appliedPatches;
     ++countOfPatches;
-    emit toLogArea(QString("#%1: Patch 0x%2 is applied. Value (HEX) is %3 -> %4")
+    emit toLogArea(Success, QString("#%1: Patch 0x%2 is applied. Value (HEX) is %3 -> %4")
                    .arg(countOfPatches)
                    .arg(QString::number(aPatch, 16).toUpper())
                    .arg(QString(aValue.toHex()))
@@ -229,7 +229,7 @@ void Patcher::patchApplied(int aBegin, int aEnd, const QString &aFromValue, cons
 {
     ++appliedPatches;
     ++countOfPatches;
-    emit toLogArea(QString("#%1: Patch 0x%2..0x%3 is filled. Value (HEX) is %4 -> %5")
+    emit toLogArea(Success, QString("#%1: Patch 0x%2..0x%3 is filled. Value (HEX) is %4 -> %5")
                    .arg(countOfPatches)
                    .arg(QString::number(aBegin, 16).toUpper())
                    .arg(QString::number(aEnd, 16).toUpper())

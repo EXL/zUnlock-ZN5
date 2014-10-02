@@ -1,9 +1,12 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "ColorLog.h"
+
 #include <QWidget>
 
 class Patcher;
+class Filer;
 
 namespace Ui {
 class Widget;
@@ -22,7 +25,7 @@ public:
 
 private slots:
     void openCG45File();
-    void appendToLog(QString aString);
+    void appendToLog(ColError err, QString aString);
     void clearLog();
     void disableButtons();
     void enableButtons();
@@ -33,11 +36,12 @@ private:
     void disableGUIButtons(bool disable);
 
 private:
-    QString textFileDialogCaption;
+    QString textFileDialogTitle;
     QString textFileDialogFilter;
 
 private:
     Patcher *patcher;
+    Filer *filer;
     Ui::Widget *ui;
 };
 
