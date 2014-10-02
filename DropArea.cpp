@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <QUrl>
+#include <QMimeData>
 
 DropArea::DropArea(QWidget *parent) :
     QLabel(parent)

@@ -30,6 +30,7 @@ private slots:
     void startPatchThread();
     void setProgress(int aValue);
     void initPatcher(const QString &aFilePath, bool drop);
+    void showAbout();
 
 private:
     void disableGUIButtons(bool disable);
@@ -39,6 +40,9 @@ protected:
     void paintEvent(QPaintEvent *);
 
 private:
+    QPixmap zn5pix;
+    QPixmap header;
+    int zn5pixWidth;
     Patcher *patcher;
     Filer *filer;
     Ui::Widget *ui;

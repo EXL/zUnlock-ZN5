@@ -29,4 +29,8 @@ FORMS    += Widget.ui
 RESOURCES += \
     zUnlock-ZN5.qrc
 
+TRANSLATIONS += \
+    l10n/zUnlock-ZN5_ru.ts \
+    l10n/zUnlock-ZN5_en.ts
+
 OTHER_FILES = patch.map

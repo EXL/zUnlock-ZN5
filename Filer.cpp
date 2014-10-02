@@ -5,6 +5,8 @@
 #include <QDir>
 #include <QDateTime>
 
+#include <QDebug>
+
 Filer::Filer(QObject *parent) :
     QObject(parent)
 {
@@ -104,6 +106,10 @@ Filer::FileError Filer::checkFileInfo(const QFileInfo &aFileInfo)
     if (!aFileInfo.isWritable()) {
         toLogArea(Error, tr("File is not writable!"));
         return FIsNotWritable;
+    }
+    if (aFileInfo.size() >= 4063232 * 2) {
+        toLogArea(Error, tr("File is too big!"));
+        return FIsTooBig;
     }
     return AllOk;
 }

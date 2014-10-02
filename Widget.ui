@@ -30,7 +30,16 @@
       </size>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:6pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;ZN5 (T-Mobile) CG45 Patcher&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -84,10 +93,13 @@
            <item>
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Instruction&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1. Motorola ZN5/ZN5 T-Mobile Phone and MicroUSB cable&lt;br/&gt;2. Installing Motorola Drivers&lt;br/&gt;3. Installing FlashTool RSDLite 3.x.x or higher&lt;br/&gt;4. Boot NoRSA&lt;br/&gt;5. Patching CG45&lt;br/&gt;6. Flash&lt;br/&gt;7. Test&lt;br/&gt;8. Test&lt;br/&gt;9. Test&lt;br/&gt;10. Test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Instruction&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1. &lt;a name=&quot;result_box&quot;/&gt;Install the drivers (&lt;a href=&quot;http://www.motofan.ru/files/soft/Handset_USB_Driver_32_v3.7.0.msi-266.zip&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;x32&lt;/span&gt;&lt;/a&gt;, &lt;a href=&quot;http://www.motofan.ru/files/soft/Handset_USB_Driver_x64_v3.7.0.zip&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;x64&lt;/span&gt;&lt;/a&gt;) for your phone;&lt;br/&gt;2. Install the &lt;a href=&quot;https://www.google.com/search?q=download+RSD+Lite&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;RSDLite 3.x.x&lt;/span&gt;&lt;/a&gt; or higher for flashing;&lt;br/&gt;3. Install &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=155910&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;MMBackup&lt;/span&gt;&lt;/a&gt; and dump your SW; &lt;br/&gt;4. Get the NoRSA bootloader: &lt;a href=&quot;http://forum.motofan.ru/index.php?act=Attach&amp;amp;type=post&amp;amp;id=204833&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ZN5&lt;/span&gt;&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://forum.motofan.ru/index.php?act=Attach&amp;amp;type=post&amp;amp;id=223937&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ZN5 T-Mobile&lt;/span&gt;&lt;/a&gt;;&lt;br/&gt;5. Flash NoRSA bootloader;&lt;br/&gt;6. Use &lt;a href=&quot;http://forum.motofan.ru/index.php?act=Attach&amp;amp;type=post&amp;amp;id=155007&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;SBF-Recalc&lt;/span&gt;&lt;/a&gt; for split SBF to SMG files;&lt;br/&gt;7. Patch your CG45 with this program;&lt;br/&gt;8. Build SBF with patched CG45 by SBF-Recalc;&lt;br/&gt;9. Flash &lt;a name=&quot;result_box&quot;/&gt;the resulting SBF-file;&lt;br/&gt;10. Enjoy!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="wordWrap">
               <bool>false</bool>
+             </property>
+             <property name="openExternalLinks">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -127,10 +139,13 @@
              <item>
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;About&lt;br/&gt;&lt;br/&gt;&lt;/span&gt;&lt;a href=&quot;https://github.com/EXL/zUnlock-ZN5&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Source code&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;EXL, 2014&lt;br/&gt;MotoFan.Ru&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;About&lt;br/&gt;&lt;br/&gt;&lt;/span&gt;&lt;a href=&quot;https://github.com/EXL/zUnlock-ZN5&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;Source code&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;&lt;a href=&quot;mailto:exl@bk.ru&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;exl@bk.ru&lt;/span&gt;&lt;/a&gt;&lt;br/&gt;EXL, 2014&lt;br/&gt;MotoFan.Ru&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="wordWrap">
                 <bool>false</bool>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -161,6 +176,13 @@
            <widget class="QPushButton" name="pushButtonStartPatch">
             <property name="text">
              <string>&amp;Patch!</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonAbout">
+            <property name="text">
+             <string>&amp;Help...</string>
             </property>
            </widget>
           </item>

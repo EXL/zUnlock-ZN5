@@ -24,6 +24,7 @@ public:
         FIsNotReadable,
         FIsNotWritable,
         FIsExists,
+        FIsTooBig,
         DIsFileIsNotDir,
         DIsEmpty,
         DIsNotReadable,

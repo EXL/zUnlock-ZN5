@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>gfx/header.png</file>
+        <file>gfx/zn5.png</file>
+        <file>l10n/zUnlock-ZN5_ru.qm</file>
+        <file>l10n/zUnlock-ZN5_en.qm</file>
     </qresource>
 </RCC>
