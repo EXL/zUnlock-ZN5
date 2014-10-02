@@ -4,8 +4,8 @@
 #include "Patcher.h"
 #include "Filer.h"
 
-#include <QDebug>
 #include <QFileDialog>
+#include <QDateTime>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -15,9 +15,6 @@ Widget::Widget(QWidget *parent) :
 
     qRegisterMetaType<ColError>("ColError");
 
-    textFileDialogTitle = "";
-    textFileDialogFilter = "";
-
     filer = new Filer(this);
     patcher = new Patcher();
 
@@ -25,52 +22,26 @@ Widget::Widget(QWidget *parent) :
 
     connect(ui->pushButtonOpenCG45, SIGNAL(clicked()), this, SLOT(openCG45File()));
     connect(ui->pushButtonStartPatch, SIGNAL(clicked()), this, SLOT(startPatchThread()));
+
     connect(patcher, SIGNAL(toLogArea(ColError, QString)), this, SLOT(appendToLog(ColError, QString)));
     connect(patcher, SIGNAL(clearLogArea()), this, SLOT(clearLog()));
     connect(patcher, SIGNAL(started()), this, SLOT(disableButtons()));
     connect(patcher, SIGNAL(finished()), this, SLOT(enableButtons()));
     connect(patcher, SIGNAL(toProgressBar(int)), this, SLOT(setProgress(int)));
+
     connect(filer, SIGNAL(toLogArea(ColError, QString)), this, SLOT(appendToLog(ColError, QString)));
 
-    retranslateUi();
+    initLogArea();
 }
 
 void Widget::openCG45File()
 {
     QString fileNameCG45 = QFileDialog::getOpenFileName(this,
-                                                        textFileDialogTitle,
+                                                        tr("Open *.smg file"),
                                                         "",
-                                                        textFileDialogFilter);
+                                                        tr("SMG Files (*.smg);;All Files (*)"));
 
-    Filer::FileError error = filer->setName(fileNameCG45);
-
-    if (error != Filer::AllOk) {
-        return;
-    }
-
-    qDebug() << error;
-
-    if (fileNameCG45 != "") {
-        QFileInfo fileInfo(fileNameCG45);
-        QString pathToDir = fileInfo.dir().path();
-        QFileInfo dirInfo(pathToDir);
-
-        if (!dirInfo.isReadable()) {
-            appendToLog(Error, "Dir isn't Readable");
-            return;
-        }
-
-        if (!dirInfo.isWritable()) {
-            appendToLog(Error, "Dir ist't Writable");
-            return;
-        }
-
-        qDebug() << pathToDir;
-
-        ui->lineEditFilePath->setText(fileNameCG45);
-        patcher->setFileName(fileNameCG45);
-        patcher->setDirName(pathToDir);
-    }
+    initPatcher(fileNameCG45);
 }
 
 void Widget::appendToLog(ColError err, QString aString)
@@ -78,20 +49,20 @@ void Widget::appendToLog(ColError err, QString aString)
     QString colorString = "%1";
     switch (err) {
         case Error: {
-            colorString = "<strong><font color=red>[Err]: %1</font></strong>";
+            colorString = tr("<strong><font color=red>[E]: %1</font></strong>");
             break;
         }
         case Warning: {
-            colorString = "<font color=orange>[W]: %1</font>";
+            colorString = tr("<font color=orange>[W]: %1</font>");
             break;
         }
         case Success: {
-            colorString = "<font color=green>[S]: %1</font>";
+            colorString = tr("<font color=green>[S]: %1</font>");
             break;
         }
         case Message:
         default: {
-            colorString = "<font color=blue>[M]: %1</font>";
+            colorString = tr("<font color=blue>[M]: %1</font>");
             break;
         }
     }
@@ -102,6 +73,7 @@ void Widget::appendToLog(ColError err, QString aString)
 void Widget::clearLog()
 {
     ui->textBrowser->clear();
+    initLogArea();
 }
 
 void Widget::disableButtons()
@@ -124,6 +96,25 @@ void Widget::disableGUIButtons(bool disable)
     //TODO: ui->label->acceptDrops();
 }
 
+void Widget::initLogArea()
+{
+    appendToLog(Message, tr("Hello! Now %1").arg(QDateTime::currentDateTime().toString("d/M/yy h:m:s")));
+}
+
+void Widget::initPatcher(const QString &aFilePath)
+{
+    Filer::FileError error = filer->setName(aFilePath);
+
+    if (error != Filer::AllOk) {
+        return;
+    }
+
+    ui->lineEditFilePath->setText(filer->getDirName() + QDir::separator() + filer->getFileName());
+    patcher->setFileName(filer->getFileName());
+    patcher->setDirName(filer->getDirName());
+    patcher->setPatchedFileName(filer->getPatchedFileName());
+}
+
 void Widget::startPatchThread()
 {
     patcher->start(QThread::IdlePriority);
@@ -132,12 +123,6 @@ void Widget::startPatchThread()
 void Widget::setProgress(int aValue)
 {
     ui->progressBar->setValue(aValue);
-}
-
-void Widget::retranslateUi()
-{
-    textFileDialogTitle = tr("Open *.smg file");
-    textFileDialogFilter = tr("SMG Files (*.smg);;All Files (*)");
 }
 
 Widget::~Widget()

@@ -18,21 +18,24 @@ public:
 
 private:
     QString fileNameCG45;
+    QString patchedFileNameCG45;
     QString dirNameCG45;
+
     enum EPhoneModels {
         ZN5,
         ZN5Tmobile,
         UnknownModel
     };
+
     int foundPatches;
     int appliedPatches;
     int countOfPatches;
     int progressValue;
 
 private:
-    bool createPatchFile(const QString &aFileName);
+    bool createPatchFile();
     Patcher::EPhoneModels determinePhoneModel(const QByteArray &aHeader);
-    bool patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneModels aPhone);
+    bool patchCG45to(QFile &aFile, const EPhoneModels aPhone);
     void patchFound(int aPatch, const QByteArray &aValue);
     void patchFound(int aBegin, int aEnd, const QString &aValue);
     void patchApplied(int aPatch, const QByteArray &aValue, const QByteArray &hexString);
@@ -45,6 +48,7 @@ private:
 public:
     void setFileName(const QString aFileName);
     void setDirName(const QString aDirName);
+    void setPatchedFileName(const QString aFileName);
 
 signals:
     void toLogArea(ColError, QString);

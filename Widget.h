@@ -20,9 +20,6 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
-public:
-    void retranslateUi();
-
 private slots:
     void openCG45File();
     void appendToLog(ColError err, QString aString);
@@ -34,10 +31,8 @@ private slots:
 
 private:
     void disableGUIButtons(bool disable);
-
-private:
-    QString textFileDialogTitle;
-    QString textFileDialogFilter;
+    void initLogArea();
+    void initPatcher(const QString &aFilePath);
 
 private:
     Patcher *patcher;

@@ -1,8 +1,8 @@
 #include "Patcher.h"
 
-#include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QDateTime>
 
 #define COUNT_OF_PATCHES 8
 #define DELAY 50
@@ -11,82 +11,59 @@ Patcher::Patcher() :
     foundPatches(0), appliedPatches(0), countOfPatches(0),
     progressValue(0)
 {
-    fileNameCG45 = dirNameCG45 = "";
+    fileNameCG45 = dirNameCG45 = patchedFileNameCG45 = "";
 
     moveToThread(this);
-}
-
-void Patcher::setFileName(const QString aFileName)
-{
-    fileNameCG45 = aFileName;
-}
-
-void Patcher::setDirName(const QString aDirName)
-{
-    dirNameCG45 = aDirName;
 }
 
 void Patcher::run()
 {
     foundPatches = appliedPatches = countOfPatches = 0;
+
     emit clearLogArea();
     emit toProgressBar(0);
+    emit toLogArea(Message, tr("Patching started... %1").arg(QDateTime::currentDateTime().toString("h:m:s")));
 
-    if (fileNameCG45 != "") {
-        emit toLogArea(Message, tr("Start Patching..."));
-        QStringList stringList = fileNameCG45.split(QDir::separator());
-        QString patchfileName = "_patched";
-        int _size = stringList.size() - 1;
-        QString origFileName = stringList.at(_size);
-        if (origFileName.contains('.')) {
-            // Find last dot
-            int i;
-            for (i = origFileName.size() - 1; i >= 0; --i) {
-                if (origFileName.at(i) == '.') {
-                    break;
-                }
-            }
-            // Insert string
-            patchfileName = origFileName.insert(i, patchfileName);
-        } else {
-            patchfileName = origFileName + patchfileName;
-        }
-        createPatchFile(patchfileName);
-    } else {
-        emit toLogArea(Error, tr("File isn't here"));
-    }
+    createPatchFile();
+
     emit toLogArea(Success, tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
+    emit toLogArea(Message, tr("Patching ended. %1").arg(QDateTime::currentDateTime().toString("h:m:s")));
 }
 
-bool Patcher::createPatchFile(const QString &aFileName)
+bool Patcher::createPatchFile()
 {
-    QFile fileCG45(fileNameCG45);
+    QFile fileCG45(dirNameCG45 + QDir::separator() + fileNameCG45);
     if (fileCG45.open(QIODevice::ReadOnly)) {
+        fileCG45.seek(0);
         QByteArray header = fileCG45.read(16);
         EPhoneModels phone = determinePhoneModel(header);
         fileCG45.seek(0);
         switch (phone) {
             case ZN5: {
-                emit toLogArea(Message, tr("CG45 from Motorola ZN5 (64 MB RAM)"));
-                patchCG45to(fileCG45, aFileName, ZN5);
+                emit toLogArea(Message, tr("CG45 from <strong>Motorola ZN5</strong> (64 MB RAM)"));
+                patchCG45to(fileCG45, ZN5);
                 break;
             }
             case ZN5Tmobile: {
-                emit toLogArea(Message, tr("CG45 from Motorola ZN5 T-Mobile (128 MB RAM)"));
-                patchCG45to(fileCG45, aFileName, ZN5Tmobile);
+                emit toLogArea(Message, tr("CG45 from <strong>Motorola ZN5 T-Mobile</strong> (128 MB RAM)"));
+                patchCG45to(fileCG45, ZN5Tmobile);
                 break;
             }
             case UnknownModel:
             default: {
-                emit toLogArea(Error, tr("File isn't recognize!"));
-                break;
+                emit toLogArea(Error, tr("File isn't recognize! This is CG45.smg?"));
+                fileCG45.close();
+                return false;
             }
         }
     } else {
-        // TODO: Return Err
+        emit toLogArea(Error, tr("Can't open file: %1").arg(fileCG45.errorString()));
+        return false;
     }
 
     fileCG45.close();
+
+    return true;
 }
 
 Patcher::EPhoneModels Patcher::determinePhoneModel(const QByteArray &aHeader)
@@ -120,17 +97,17 @@ Patcher::EPhoneModels Patcher::determinePhoneModel(const QByteArray &aHeader)
     return UnknownModel;
 }
 
-bool Patcher::patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneModels aPhone)
+bool Patcher::patchCG45to(QFile &aFile, const EPhoneModels aPhone)
 {
     QByteArray ramByteArray(aFile.readAll());
     QBuffer buffer(&ramByteArray);
     if (!buffer.open(QIODevice::ReadWrite)) {
-        toLogArea(Error, buffer.errorString());
+        emit toLogArea(Error, tr("QBuffer error: %1").arg(buffer.errorString()));
         return false;
     }
 
     if (aPhone == UnknownModel) {
-        toLogArea(Error, tr("Bad CG45 file"));
+        emit toLogArea(Error, tr("Bad CG45 file!"));
         return false;
     }
 
@@ -183,7 +160,7 @@ bool Patcher::patchCG45to(QFile &aFile, const QString &aFileName, const EPhoneMo
 
     buffer.close();
 
-    writePatchedCG45file(dirNameCG45 + QDir::separator() + aFileName, ramByteArray);
+    writePatchedCG45file(dirNameCG45 + QDir::separator() + patchedFileNameCG45, ramByteArray);
 
     return true;
 }
@@ -297,12 +274,29 @@ bool Patcher::writePatchedCG45file(const QString &aFullName, const QByteArray &a
 {
     QFile file(aFullName);
     if (!file.open(QIODevice::WriteOnly)) {
+        emit toLogArea(Error, tr("Cannot open file for write: %1").arg(file.errorString()));
         return false;
     } else {
         file.write(aByteArray);
         file.close();
+        emit toLogArea(Success, tr("File: %1 successfully writed!").arg(patchedFileNameCG45));
         return true;
     }
+}
+
+void Patcher::setFileName(const QString aFileName)
+{
+    fileNameCG45 = aFileName;
+}
+
+void Patcher::setDirName(const QString aDirName)
+{
+    dirNameCG45 = aDirName;
+}
+
+void Patcher::setPatchedFileName(const QString aFileName)
+{
+    patchedFileNameCG45 = aFileName;
 }
 
 Patcher::~Patcher()
