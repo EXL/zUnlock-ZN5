@@ -27,7 +27,7 @@ Widget::Widget(QWidget *parent) :
     zn5pixWidth = zn5pix.width();
 
     setFixedSize(sizeHint());
-    setWindowIcon(QIcon("://gfx/zUnlock-ZN5.ico"));
+    setWindowIcon(QIcon("://gfx/ZN5_icon.png"));
 
     // For monospace font into log output
     QFont font("Monospace");
