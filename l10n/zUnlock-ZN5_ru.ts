@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>DropArea</name>
     <message>
@@ -74,6 +74,11 @@ element</source>
         <source>File is not writable!</source>
         <translation>Файл недоступен для записи!</translation>
     </message>
+    <message>
+        <location filename="../Filer.cpp" line="109"/>
+        <source>File is too big!</source>
+        <translation>Файл слишком большой!</translation>
+    </message>
 </context>
 <context>
     <name>Patcher</name>
@@ -93,42 +98,42 @@ element</source>
         <translation>Пропатчено. %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="42"/>
+        <location filename="../Patcher.cpp" line="44"/>
         <source>CG45 from &lt;strong&gt;Motorola ZN5&lt;/strong&gt; (64 MB RAM)</source>
         <translation>CG45 из &lt;strong&gt;Motorola ZN5&lt;/strong&gt; (64 МБ ОЗУ)</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="47"/>
+        <location filename="../Patcher.cpp" line="49"/>
         <source>CG45 from &lt;strong&gt;Motorola ZN5 T-Mobile&lt;/strong&gt; (128 MB RAM)</source>
         <translation>CG45 из &lt;strong&gt;Motorola ZN5 T-Mobile&lt;/strong&gt; (128 МБ ОЗУ)</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="53"/>
+        <location filename="../Patcher.cpp" line="55"/>
         <source>File isn&apos;t recognize! This is CG45.smg?</source>
         <translation>Файл не распознан! Это точно CG45.smg?</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="59"/>
+        <location filename="../Patcher.cpp" line="61"/>
         <source>Can&apos;t open file: %1</source>
         <translation>Не могу открыть файл: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="104"/>
+        <location filename="../Patcher.cpp" line="106"/>
         <source>QBuffer error: %1</source>
         <translation>Ошибка QBuffer&apos;а: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="109"/>
+        <location filename="../Patcher.cpp" line="111"/>
         <source>Bad CG45 file!</source>
         <translation>Поврежденный CG45 файл!</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="276"/>
+        <location filename="../Patcher.cpp" line="278"/>
         <source>Cannot open file for write: %1</source>
         <translation>Не могу открыть файл для записи: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="281"/>
+        <location filename="../Patcher.cpp" line="283"/>
         <source>File: &lt;strong&gt;%1&lt;/strong&gt; successfully writed!</source>
         <translation>Файл: &lt;strong&gt;%1&lt;/strong&gt; успешно записан!</translation>
     </message>
@@ -176,68 +181,71 @@ element</source>
         <translation>&amp;Открыть файл...</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="178"/>
         <source>&amp;Patch!</source>
-        <translation>&amp;Патчить!</translation>
+        <translation type="vanished">&amp;Патчить!</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="185"/>
+        <location filename="../Widget.ui" line="178"/>
         <source>&amp;Help...</source>
         <translation>По&amp;мощь...</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="204"/>
+        <location filename="../Widget.ui" line="197"/>
         <source>Log Output</source>
         <translation>Лог действий</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="51"/>
+        <location filename="../Widget.cpp" line="58"/>
         <source>Open *.smg file</source>
         <translation>Открыть *.smg файл</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="53"/>
+        <location filename="../Widget.cpp" line="60"/>
         <source>SMG Files (*.smg);;All Files (*)</source>
         <translation>SMG файлы (*.smg);;Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="63"/>
+        <location filename="../Widget.cpp" line="74"/>
         <source>&lt;strong&gt;&lt;font color=red&gt;[E]: %1&lt;/font&gt;&lt;/strong&gt;</source>
         <translation>&lt;strong&gt;&lt;font color=red&gt;[О]: %1&lt;/font&gt;&lt;/strong&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="67"/>
+        <location filename="../Widget.cpp" line="78"/>
         <source>&lt;font color=orange&gt;[W]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=orange&gt;[В]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="71"/>
+        <location filename="../Widget.cpp" line="82"/>
         <source>&lt;font color=green&gt;[S]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=green&gt;[У]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="76"/>
+        <location filename="../Widget.cpp" line="87"/>
         <source>&lt;font color=blue&gt;[M]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=blue&gt;[С]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="111"/>
+        <location filename="../Widget.cpp" line="122"/>
         <source>Hello! Now %1</source>
         <translation>Добро пожаловать! Сейчас %1</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="134"/>
+        <location filename="../Widget.cpp" line="143"/>
         <source>About zUnlock-ZN5</source>
         <translation>О программе zUnlock-ZN5</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="134"/>
+        <location filename="../Widget.cpp" line="143"/>
+        <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;.&lt;br&gt;Based on pathes by &lt;a href=&quot;http://forum.motofan.ru/index.php?showuser=90408&quot;&gt;yakk&lt;/a&gt;.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;strong&gt;Версия 0.1&lt;/strong&gt;&lt;/p&gt;Эта программа поможет вам пропатчить вашу кодовую группу (CG45),&lt;br&gt;для того чтобы разблокировать телефон. Подробности в &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;этой теме&lt;/a&gt;&lt;br&gt;на MotoFan.Ru.&lt;br&gt;&lt;br&gt;Тестировалось на &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; и &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;.&lt;br&gt;Основано на патчах от &lt;a href=&quot;http://forum.motofan.ru/index.php?showuser=90408&quot;&gt;yakk&apos;а&lt;/a&gt;.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;strong&gt;Версия 0.1&lt;/strong&gt;&lt;/p&gt;Эта программа поможет вам пропатчить вашу кодовую группу (CG45),&lt;br&gt;для того чтобы разблокировать телефон. Подробности в &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;этой теме&lt;/a&gt;&lt;br&gt;на MotoFan.Ru.&lt;br&gt;&lt;br&gt;Тестировалось на &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; и &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;p&gt;&lt;br&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;&lt;strong&gt;Версия 0.1&lt;/strong&gt;&lt;/p&gt;Эта программа поможет вам пропатчить вашу кодовую группу (CG45),&lt;br&gt;для того чтобы разблокировать телефон. Подробности в &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;этой теме&lt;/a&gt;&lt;br&gt;на MotoFan.Ru.&lt;br&gt;&lt;br&gt;Тестировалось на &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; и &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;p&gt;&lt;br&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;strong&gt;Версия 0.1&lt;/strong&gt;&lt;/p&gt;Эта программа поможет вам пропатчить вашу кодовую группу (CG45),&lt;br&gt;для того чтобы разблокировать телефон. Подробности в &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;этой теме&lt;/a&gt;&lt;br&gt;на MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;&lt;strong&gt;Версия 0.1&lt;/strong&gt;&lt;/p&gt;Эта программа поможет вам пропатчить вашу кодовую группу (CG45),&lt;br&gt;для того чтобы разблокировать телефон. Подробности в &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;этой теме&lt;/a&gt;&lt;br&gt;на MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

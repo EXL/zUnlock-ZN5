@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.1" language="en_US">
 <context>
     <name>DropArea</name>
     <message>
@@ -72,6 +72,11 @@ element</translation>
         <source>File is not writable!</source>
         <translation>File is not writable!</translation>
     </message>
+    <message>
+        <location filename="../Filer.cpp" line="109"/>
+        <source>File is too big!</source>
+        <translation>File is too big!</translation>
+    </message>
 </context>
 <context>
     <name>Patcher</name>
@@ -91,42 +96,42 @@ element</translation>
         <translation>Patching ended. %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="42"/>
+        <location filename="../Patcher.cpp" line="44"/>
         <source>CG45 from &lt;strong&gt;Motorola ZN5&lt;/strong&gt; (64 MB RAM)</source>
         <translation>CG45 from &lt;strong&gt;Motorola ZN5&lt;/strong&gt; (64 MB RAM)</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="47"/>
+        <location filename="../Patcher.cpp" line="49"/>
         <source>CG45 from &lt;strong&gt;Motorola ZN5 T-Mobile&lt;/strong&gt; (128 MB RAM)</source>
         <translation>CG45 from &lt;strong&gt;Motorola ZN5 T-Mobile&lt;/strong&gt; (128 MB RAM)</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="53"/>
+        <location filename="../Patcher.cpp" line="55"/>
         <source>File isn&apos;t recognize! This is CG45.smg?</source>
         <translation>File isn&apos;t recognize! This is CG45.smg?</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="59"/>
+        <location filename="../Patcher.cpp" line="61"/>
         <source>Can&apos;t open file: %1</source>
         <translation>Can&apos;t open file: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="104"/>
+        <location filename="../Patcher.cpp" line="106"/>
         <source>QBuffer error: %1</source>
         <translation>QBuffer error: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="109"/>
+        <location filename="../Patcher.cpp" line="111"/>
         <source>Bad CG45 file!</source>
         <translation>Bad CG45 file!</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="276"/>
+        <location filename="../Patcher.cpp" line="278"/>
         <source>Cannot open file for write: %1</source>
         <translation>Cannot open file for write: %1</translation>
     </message>
     <message>
-        <location filename="../Patcher.cpp" line="281"/>
+        <location filename="../Patcher.cpp" line="283"/>
         <source>File: &lt;strong&gt;%1&lt;/strong&gt; successfully writed!</source>
         <translation>File: &lt;strong&gt;%1&lt;/strong&gt; successfully writed!</translation>
     </message>
@@ -174,68 +179,71 @@ element</translation>
         <translation>&amp;Open File...</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="178"/>
         <source>&amp;Patch!</source>
-        <translation>&amp;Patch!</translation>
+        <translation type="vanished">&amp;Patch!</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="185"/>
+        <location filename="../Widget.ui" line="178"/>
         <source>&amp;Help...</source>
         <translation>&amp;Help...</translation>
     </message>
     <message>
-        <location filename="../Widget.ui" line="204"/>
+        <location filename="../Widget.ui" line="197"/>
         <source>Log Output</source>
         <translation>Log Output</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="51"/>
+        <location filename="../Widget.cpp" line="58"/>
         <source>Open *.smg file</source>
         <translation>Open *.smg file</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="53"/>
+        <location filename="../Widget.cpp" line="60"/>
         <source>SMG Files (*.smg);;All Files (*)</source>
         <translation>SMG Files (*.smg);;All Files (*)</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="63"/>
+        <location filename="../Widget.cpp" line="74"/>
         <source>&lt;strong&gt;&lt;font color=red&gt;[E]: %1&lt;/font&gt;&lt;/strong&gt;</source>
         <translation>&lt;strong&gt;&lt;font color=red&gt;[E]: %1&lt;/font&gt;&lt;/strong&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="67"/>
+        <location filename="../Widget.cpp" line="78"/>
         <source>&lt;font color=orange&gt;[W]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=orange&gt;[W]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="71"/>
+        <location filename="../Widget.cpp" line="82"/>
         <source>&lt;font color=green&gt;[S]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=green&gt;[S]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="76"/>
+        <location filename="../Widget.cpp" line="87"/>
         <source>&lt;font color=blue&gt;[M]: %1&lt;/font&gt;</source>
         <translation>&lt;font color=blue&gt;[M]: %1&lt;/font&gt;</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="111"/>
+        <location filename="../Widget.cpp" line="122"/>
         <source>Hello! Now %1</source>
         <translation>Hello! Now %1</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="134"/>
+        <location filename="../Widget.cpp" line="143"/>
         <source>About zUnlock-ZN5</source>
         <translation>About zUnlock-ZN5</translation>
     </message>
     <message>
-        <location filename="../Widget.cpp" line="134"/>
+        <location filename="../Widget.cpp" line="143"/>
+        <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;.&lt;br&gt;Based on pathes by &lt;a href=&quot;http://forum.motofan.ru/index.php?showuser=90408&quot;&gt;yakk&lt;/a&gt;.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
+        <translation>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;.&lt;br&gt;Based on pathes by &lt;a href=&quot;http://forum.motofan.ru/index.php?showuser=90408&quot;&gt;yakk&lt;/a&gt;.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+    </message>
+    <message>
         <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;br&gt;Tested on &lt;i&gt;R6637_G_81.03.05R&lt;/i&gt; and &lt;i&gt;R6637_G_81.11.2BR_128&lt;/i&gt;&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
+        <translation type="vanished">&lt;p&gt;&lt;strong&gt;Version 0.1&lt;/strong&gt;&lt;/p&gt;This program helps you to patch the code group (CG45),&lt;br&gt;for unlock your phone. More details in this &lt;a href=&quot;http://forum.motofan.ru/index.php?showtopic=1730577&quot;&gt;forum thread&lt;/a&gt;&lt;br&gt;on MotoFan.Ru.&lt;br&gt;&lt;p&gt;&lt;center&gt;EXL, 2014&lt;/center&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

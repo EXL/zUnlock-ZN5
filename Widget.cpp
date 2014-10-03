@@ -145,7 +145,8 @@ void Widget::showAbout()
                                                          "for unlock your phone. More details in this "
                                                          "<a href=\"http://forum.motofan.ru/index.php?showtopic=1730577\">forum thread</a><br>"
                                                          "on MotoFan.Ru.<br><br>"
-                                                         "Tested on <i>R6637_G_81.03.05R</i> and <i>R6637_G_81.11.2BR_128</i><br>"
+                                                         "Tested on <i>R6637_G_81.03.05R</i> and <i>R6637_G_81.11.2BR_128</i>.<br>"
+                                                         "Based on pathes by <a href=\"http://forum.motofan.ru/index.php?showuser=90408\">yakk</a>.<br>"
                                                          "<p><center>EXL, 2014</center></p>"));
 }
 
