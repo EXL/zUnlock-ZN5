@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = zUnlock-ZN5
 TEMPLATE = app
 
+win32 {
+    QMAKE_LFLAGS += -static -static-libgcc -static-libstdc++
+}
 
 SOURCES += main.cpp\
         Widget.cpp \
