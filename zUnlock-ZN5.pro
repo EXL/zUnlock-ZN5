@@ -11,9 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = zUnlock-ZN5
 TEMPLATE = app
 
-
-SOURCES += main.cpp\
-        Widget.cpp \
+SOURCES += main.cpp \
+    Widget.cpp \
     Patcher.cpp \
     Filer.cpp \
     DropArea.cpp
