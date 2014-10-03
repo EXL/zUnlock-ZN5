@@ -44,7 +44,8 @@ private:
 
 private:
     FileError checkFileInfo(const QFileInfo &aFileInfo);
-    void generateName(int aSize);
+    void generateName(bool aSmgExt);
+    int generateNum(const QString &aName, int aStart, bool aSmgExt) const;
 
 signals:
     void toLogArea(ColError, QString);

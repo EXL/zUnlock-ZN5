@@ -54,6 +54,7 @@ signals:
     void toLogArea(ColError, QString);
     void clearLogArea();
     void toProgressBar(int);
+    void done();
 };
 
 #endif // PATCHER_H

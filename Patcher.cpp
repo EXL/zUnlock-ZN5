@@ -27,6 +27,8 @@ void Patcher::run()
         emit toLogArea(Success, tr("Done: %1/%2 applied patches").arg(appliedPatches).arg(countOfPatches));
         emit toLogArea(Message, tr("Patching ended. %1").arg(QDateTime::currentDateTime().toString("hh:mm:ss")));
     }
+
+    emit done();
 }
 
 bool Patcher::createPatchFile()

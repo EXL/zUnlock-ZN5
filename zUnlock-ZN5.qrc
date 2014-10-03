@@ -4,5 +4,6 @@
         <file>gfx/zn5.png</file>
         <file>l10n/zUnlock-ZN5_ru.qm</file>
         <file>l10n/zUnlock-ZN5_en.qm</file>
+        <file>gfx/zUnlock-ZN5.ico</file>
     </qresource>
 </RCC>

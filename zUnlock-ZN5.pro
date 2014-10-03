@@ -33,4 +33,9 @@ TRANSLATIONS += \
     l10n/zUnlock-ZN5_ru.ts \
     l10n/zUnlock-ZN5_en.ts
 
-OTHER_FILES = patch.map
+OTHER_FILES += patch.map \
+    zUnlock-ZN5.rc \
+    ReadMe.md
+
+# Windows Executable Icon
+win32:RC_FILE = zUnlock-ZN5.rc

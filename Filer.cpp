@@ -5,8 +5,6 @@
 #include <QDir>
 #include <QDateTime>
 
-#include <QDebug>
-
 Filer::Filer(QObject *parent) :
     QObject(parent)
 {
@@ -75,9 +73,9 @@ Filer::FileError Filer::setName(const QString &aFileName)
     } else {
         patchedFileName = fileName;
         if (patchedFileName.endsWith(".smg")) {
-            generateName(patchedFileName.size() - 5);
+            generateName(true);
         } else {
-            generateName(patchedFileName.size() - 1);
+            generateName(false);
         }
     }
     QFileInfo patchedFileInfo(dirName + QDir::separator() + patchedFileName);
@@ -114,16 +112,54 @@ Filer::FileError Filer::checkFileInfo(const QFileInfo &aFileInfo)
     return AllOk;
 }
 
-void Filer::generateName(int aSize)
+void Filer::generateName(bool aSmgExt)
 {
-    QChar ch = patchedFileName.at(aSize);
-    if (!(ch.isDigit())) {
-        patchedFileName.insert(aSize + 1, QString::number(0));
-    } else {
-        int n = QString(ch).toInt();
-        ++n;
-        patchedFileName.replace(aSize, 1, QString::number(n));
+    QString s = patchedFileName;
+    if (aSmgExt) {
+        s.remove(".smg");
     }
+    int endString = s.size() - 1;
+
+    QChar ch = patchedFileName.at(endString);
+    if (!(ch.isDigit())) {
+        patchedFileName = s + QString::number(generateNum(s, 0, aSmgExt));
+    } else {
+        QString num;
+        int i;
+        for (i = endString; i >= 0; --i) {
+            if (s.at(i).isDigit()) {
+                num.insert(0, s.at(i));
+            } else {
+                break;
+            }
+        }
+        s = s.left(i + 1);
+        patchedFileName = s + QString::number(generateNum(s, num.toInt(), aSmgExt));
+}
+
+    if (aSmgExt) {
+        patchedFileName += ".smg";
+    }
+}
+
+int Filer::generateNum(const QString &aName, int aStart, bool aSmgExt) const
+{
+    QString begin = dirName + QDir::separator() + aName;
+    QString end = QString::number(aStart);
+    if (aSmgExt) {
+        end += ".smg";
+    }
+    if (!QFileInfo(begin + end).exists()) {
+        return aStart;
+    }
+    int i;
+    for (i = aStart; QFileInfo(begin + end).exists(); ++i) {
+        end = QString::number(i);
+        if (aSmgExt) {
+            end += ".smg";
+        }
+    }
+    return i - 1;
 }
 
 QString Filer::getDirName() const

@@ -29,7 +29,7 @@ private slots:
     void enableButtons();
     void startPatchThread();
     void setProgress(int aValue);
-    void initPatcher(const QString &aFilePath, bool drop);
+    void initPatcher(const QString &aFilePath);
     void showAbout();
 
 private:

@@ -47,7 +47,7 @@ void DropArea::dropEvent(QDropEvent *event)
     if (urlList.size() > 1) {
         setText(tr("Please drop\nonly one\nelement"));
     } else {
-        emit toPatcher(urlList.at(0).toLocalFile(), true);
+        emit toPatcher(urlList.at(0).toLocalFile());
     }
 
     setBackgroundRole(QPalette::Dark);

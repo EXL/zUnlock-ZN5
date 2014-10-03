@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QMessageBox>
+#include <QFont>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -26,11 +27,16 @@ Widget::Widget(QWidget *parent) :
     zn5pixWidth = zn5pix.width();
 
     setFixedSize(sizeHint());
+    setWindowIcon(QIcon("://gfx/zUnlock-ZN5.ico"));
+
+    // For monospace font into log output
+    QFont font("Monospace");
+    font.setStyleHint(QFont::TypeWriter);
+    ui->textBrowser->setFont(font);
 
     ui->labelDropFile->setLabelText(ui->labelDropFile->text());
 
     connect(ui->pushButtonOpenCG45, SIGNAL(clicked()), this, SLOT(openCG45File()));
-    connect(ui->pushButtonStartPatch, SIGNAL(clicked()), this, SLOT(startPatchThread()));
     connect(ui->pushButtonAbout, SIGNAL(clicked()), this, SLOT(showAbout()));
 
     connect(patcher, SIGNAL(toLogArea(ColError, QString)), this, SLOT(appendToLog(ColError, QString)));
@@ -38,9 +44,10 @@ Widget::Widget(QWidget *parent) :
     connect(patcher, SIGNAL(started()), this, SLOT(disableButtons()));
     connect(patcher, SIGNAL(finished()), this, SLOT(enableButtons()));
     connect(patcher, SIGNAL(toProgressBar(int)), this, SLOT(setProgress(int)));
+    connect(patcher, SIGNAL(done()), ui->labelDropFile, SLOT(clear()));
 
     connect(filer, SIGNAL(toLogArea(ColError, QString)), this, SLOT(appendToLog(ColError, QString)));
-    connect(ui->labelDropFile, SIGNAL(toPatcher(QString, bool)), this, SLOT(initPatcher(QString, bool)));
+    connect(ui->labelDropFile, SIGNAL(toPatcher(QString)), this, SLOT(initPatcher(QString)));
 
     initLogArea();
 }
@@ -52,30 +59,34 @@ void Widget::openCG45File()
                                                         "",
                                                         tr("SMG Files (*.smg);;All Files (*)"));
 
-    initPatcher(fileNameCG45, false);
+    if (fileNameCG45.isEmpty()) {
+        return;
+    }
+
+    initPatcher(fileNameCG45);
 }
 
 void Widget::appendToLog(ColError err, QString aString)
 {
     QString colorString = "%1";
     switch (err) {
-        case Error: {
-            colorString = tr("<strong><font color=red>[E]: %1</font></strong>");
-            break;
-        }
-        case Warning: {
-            colorString = tr("<font color=orange>[W]: %1</font>");
-            break;
-        }
-        case Success: {
-            colorString = tr("<font color=green>[S]: %1</font>");
-            break;
-        }
-        case Message:
-        default: {
-            colorString = tr("<font color=blue>[M]: %1</font>");
-            break;
-        }
+    case Error: {
+        colorString = tr("<strong><font color=red>[E]: %1</font></strong>");
+        break;
+    }
+    case Warning: {
+        colorString = tr("<font color=orange>[W]: %1</font>");
+        break;
+    }
+    case Success: {
+        colorString = tr("<font color=green>[S]: %1</font>");
+        break;
+    }
+    case Message:
+    default: {
+        colorString = tr("<font color=blue>[M]: %1</font>");
+        break;
+    }
     }
 
     ui->textBrowser->append(colorString.arg(aString));
@@ -100,7 +111,7 @@ void Widget::enableButtons()
 void Widget::disableGUIButtons(bool disable)
 {
     ui->pushButtonOpenCG45->setDisabled(disable);
-    ui->pushButtonStartPatch->setDisabled(disable);
+    ui->pushButtonAbout->setDisabled(disable);
 
     ui->progressBar->setDisabled(!disable);
     ui->labelDropFile->setDisabled(disable);
@@ -111,7 +122,7 @@ void Widget::initLogArea()
     appendToLog(Message, tr("Hello! Now %1").arg(QDateTime::currentDateTime().toString("dd/MM/yy hh:mm:ss")));
 }
 
-void Widget::initPatcher(const QString &aFilePath, bool drop)
+void Widget::initPatcher(const QString &aFilePath)
 {
     Filer::FileError error = filer->setName(aFilePath);
 
@@ -124,9 +135,7 @@ void Widget::initPatcher(const QString &aFilePath, bool drop)
     patcher->setDirName(filer->getDirName());
     patcher->setPatchedFileName(filer->getPatchedFileName());
 
-    if (drop) {
-        startPatchThread();
-    }
+    startPatchThread();
 }
 
 void Widget::showAbout()
@@ -163,5 +172,3 @@ Widget::~Widget()
     delete filer;
     delete ui;
 }
-
-

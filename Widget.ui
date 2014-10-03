@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>574</width>
-    <height>542</height>
+    <height>576</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,10 +46,10 @@
    <item>
     <widget class="QFrame" name="frame">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Sunken</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
@@ -84,10 +84,10 @@
            </size>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::Box</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Sunken</enum>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
@@ -130,10 +130,10 @@
           <item>
            <widget class="QFrame" name="frame_4">
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::Box</enum>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+             <enum>QFrame::Sunken</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <item>
@@ -169,13 +169,6 @@
            <widget class="QPushButton" name="pushButtonOpenCG45">
             <property name="text">
              <string>&amp;Open File...</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonStartPatch">
-            <property name="text">
-             <string>&amp;Patch!</string>
             </property>
            </widget>
           </item>
@@ -247,9 +240,16 @@
         <property name="value">
          <number>0</number>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
      </layout>
+     <zorder>textBrowser</zorder>
+     <zorder>progressBar</zorder>
+     <zorder>label_4</zorder>
+     <zorder>frame_3</zorder>
     </widget>
    </item>
   </layout>

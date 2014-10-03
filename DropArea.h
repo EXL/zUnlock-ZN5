@@ -24,7 +24,7 @@ public slots:
     void clear();
 
 signals:
-    void toPatcher(QString, bool);
+    void toPatcher(QString);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event);
